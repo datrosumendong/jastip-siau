@@ -27,10 +27,5 @@
     "frameworksBackend": {
       "region": "asia-southeast1"
     }
-  },
-  "apphosting": {
-    "backendId": "jastip-siau",
-    "rootDir": "/",
-    "alwaysDeployFromSource": true
   }
 }
