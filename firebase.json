@@ -9,7 +9,8 @@
         ".git",
         "firebase-debug.log",
         "firebase-debug.*.log",
-        "*.local"
+        "*.local",
+        ".runtimeconfig.json"
       ],
       "predeploy": [
         "npm --prefix \"$RESOURCE_DIR\" run lint"
@@ -17,17 +18,19 @@
     }
   ],
   "hosting": {
-    "public": "public",
+    "source": ".",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
     ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
+    "frameworksBackend": {
+      "region": "asia-southeast1"
+    }
+  },
+  "apphosting": {
+    "backendId": "jastip-siau",
+    "rootDir": "/",
+    "alwaysDeployFromSource": true
   }
 }
