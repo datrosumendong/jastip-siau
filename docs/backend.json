@@ -1,0 +1,197 @@
+
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Data profil lengkap warga Siau (Member, Kurir, Admin, Owner, UMKM).",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "username": { "type": "string" },
+        "fullName": { "type": "string" },
+        "storeName": { "type": "string", "description": "Nama resmi toko jika user adalah UMKM." },
+        "email": { "type": "string", "format": "email" },
+        "whatsapp": { "type": "string" },
+        "address": { "type": "string" },
+        "latitude": { "type": "number" },
+        "longitude": { "type": "number" },
+        "role": { "type": "string", "enum": ["member", "courier", "admin", "owner", "umkm"] },
+        "isOnline": { "type": "boolean" },
+        "isUnderInvestigation": { "type": "boolean", "description": "Status lockdown kurir saat proses investigasi admin." },
+        "hasActiveDebt": { "type": "boolean" },
+        "fcmToken": { "type": "string" },
+        "lastGpsUpdate": { "type": "string", "format": "date-time", "description": "Timestamp terakhir sinyal radar kurir diterima." },
+        "twoStepEnabled": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "NewsPost": {
+      "title": "Developer News",
+      "description": "Arsip berita dan update sistem dari Developer Jastip Siau.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "labels": { "type": "array", "items": { "type": "string" }, "description": "Label/Keywords berita." },
+        "authorName": { "type": "string" },
+        "authorRole": { "type": "string" },
+        "category": { "type": "string", "enum": ["update", "info", "maintenance"] },
+        "imageUrl": { "type": "string" },
+        "isHeadline": { "type": "boolean", "description": "Penentu apakah berita bertahta di radar headline pangkalan warga." },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "Notification": {
+      "title": "System Notification",
+      "description": "Sinyal radar notifikasi untuk koordinasi warga dan sistem.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string", "description": "UID penerima atau SYSTEM_BROADCAST." },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "type": { "type": "string", "enum": ["chat", "order", "system", "complaint", "post_like", "post_comment", "news"] },
+        "targetId": { "type": "string", "description": "ID Ref (ChatID, OrderID, NewsID, dll)." },
+        "isOpened": { "type": "boolean" },
+        "senderPhoto": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "Chat": {
+      "title": "Unified Chat",
+      "description": "Induk obrolan terpusat dengan diferensiasi kategori dan linking data.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "ID Dokumen Firestore Asli." },
+        "type": { "type": "string", "enum": ["cht_private", "cht_toko", "cht_order", "cht_admin", "cht_komplain"], "description": "Kolom pembeda kategori chat." },
+        "orderId": { "type": "string", "description": "Referensi ID Order jika bertipe cht_order (Jembatan NoSQL)." },
+        "senderId": { "type": "string", "description": "UID Pemula Obrolan." },
+        "receiverId": { "type": "string", "description": "UID Target Obrolan (untuk 1-on-1)." },
+        "participants": { "type": "array", "items": { "type": "string" } },
+        "participantNames": { "type": "object", "description": "Denormalisasi Nama (UID: Nama)" },
+        "participantPhotos": { "type": "object", "description": "Denormalisasi Foto (UID: Foto)" },
+        "lastMessage": { "type": "string" },
+        "lastMessageSenderId": { "type": "string" },
+        "lastMessageStatus": { "type": "string", "enum": ["sent", "delivered", "read"] },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "participants", "type"]
+    },
+    "Message": {
+      "title": "Chat Message",
+      "description": "Log pesan individu dalam sub-koleksi chat.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "senderId": { "type": "string" },
+        "senderName": { "type": "string" },
+        "text": { "type": "string" },
+        "status": { "type": "string", "enum": ["sent", "delivered", "read"] },
+        "isEdited": { "type": "boolean" },
+        "replyTo": { "type": "object" },
+        "reactions": { "type": "object" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "senderId", "text"]
+    },
+    "FinancialRecord": {
+      "title": "Financial Record",
+      "description": "Log snapshot finansial permanen untuk audit mandiri mitra.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "orderId": { "type": "string" },
+        "amount": { "type": "number" },
+        "serviceFee": { "type": "number" },
+        "itemPrice": { "type": "number" },
+        "userName": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string", "enum": ["income", "expense"] },
+        "type": { "type": "string", "enum": ["web_order", "manual"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "Post": {
+      "title": "Community Post",
+      "description": "Postingan di feed sosial Siau Connect dengan dukungan katalog UMKM.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string", "description": "Nama pengirim (User atau Toko)." },
+        "userPhoto": { "type": "string" },
+        "userRole": { "type": "string" },
+        "type": { "type": "string", "enum": ["social", "catalog"], "description": "Pembeda antara status biasa dan promosi produk UMKM." },
+        "productId": { "type": "string", "description": "Referensi ID Produk unik." },
+        "productName": { "type": "string" },
+        "productPrice": { "type": "number" },
+        "umkmId": { "type": "string", "description": "UID Pemilik Toko." },
+        "umkmName": { "type": "string", "description": "Nama Resmi Toko UMKM." },
+        "storeName": { "type": "string", "description": "Alias Nama Toko." },
+        "content": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "likes": { "type": "array", "items": { "type": "string" } },
+        "likeNames": { "type": "object", "description": "Denormalisasi nama penyuka (UID: Name) untuk radar tanggapan." },
+        "isHidden": { "type": "boolean", "description": "Status moderasi AI/Admin." },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "OTPRequest": {
+      "title": "OTP Request",
+      "description": "Permintaan kode keamanan 2FA untuk diproses oleh server.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "email": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "sent", "error"] },
+        "challenge": { "type": "string", "description": "Kode yang dihasilkan server (hanya terbaca oleh pemilik)." },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    }
+  },
+  "auth": {
+    "providers": ["email", "google"]
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/backend/entities/UserProfile" },
+      "description": "Database identitas warga Siau."
+    },
+    "/news/{newsId}": {
+      "schema": { "$ref": "#/backend/entities/NewsPost" },
+      "description": "Pangkalan berita developer sistem."
+    },
+    "/notifications/{notifId}": {
+      "schema": { "$ref": "#/backend/entities/Notification" },
+      "description": "Pangkalan radar notifikasi real-time."
+    },
+    "/otp_requests/{requestId}": {
+      "schema": { "$ref": "#/backend/entities/OTPRequest" },
+      "description": "Antrean pengiriman OTP server-side."
+    },
+    "/users/{userId}/financial_history/{recordId}": {
+      "schema": { "$ref": "#/backend/entities/FinancialRecord" },
+      "description": "Arsip pendapatan logistik kurir (Independen)."
+    },
+    "/users/{userId}/ledger/{recordId}": {
+      "schema": { "$ref": "#/backend/entities/FinancialRecord" },
+      "description": "Buku kasir digital mitra UMKM (Sync Web & Manual)."
+    },
+    "/chats/{chatId}": {
+      "schema": { "$ref": "#/backend/entities/Chat" },
+      "description": "Koleksi induk obrolan warga."
+    },
+    "/chats/{chatId}/messages/{messageId}": {
+      "schema": { "$ref": "#/backend/entities/Message" },
+      "description": "Sub-koleksi log pesan."
+    },
+    "/posts/{postId}": {
+      "schema": { "$ref": "#/backend/entities/Post" },
+      "description": "Database feed sosial warga Siau."
+    }
+  }
+}

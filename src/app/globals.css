@@ -1,0 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 33% 97%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 209 77% 40%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 190 69% 64%;
+    --accent-foreground: 222 47% 11%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 209 77% 40%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  /* SOP: RIGID VIEWPORT - Mengunci tinggi tanpa merusak posisi elemen */
+  html, body {
+    height: 100svh;
+    overflow: hidden;
+    @apply bg-background text-foreground font-body;
+    width: 100%;
+    overscroll-behavior-y: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer utilities {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-primary/10 rounded-full;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/20;
+  }
+
+  @keyframes marquee-progress {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(200%); }
+  }
+
+  .animate-marquee-progress {
+    animation: marquee-progress 2s infinite linear;
+  }
+
+  .overscroll-contain-y {
+    overscroll-behavior-y: contain;
+  }
+}
+
+/**
+ * SOP: SOVEREIGN THERMAL PRINT (MAHAKARYA)
+ * Menjamin kedaulatan cetak struk mini printer.
+ */
+@media print {
+  /* 1. Musnahkan seluruh elemen UI Dashboard secara fisik */
+  body * {
+    visibility: hidden !important;
+  }
+  
+  /* 2. Bangkitkan hanya area struk dengan ID khusus */
+  #thermal-receipt-area, #thermal-receipt-area * {
+    visibility: visible !important;
+  }
+
+  /* 3. Kunci posisi struk di pojok kiri atas kertas printer */
+  #thermal-receipt-area {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 58mm !important; /* Standar Lebar Printer Thermal Mini */
+    margin: 0 !important;
+    padding: 5mm !important;
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  /* 4. Bersihkan latar belakang dialog agar tidak ada warna abu-abu */
+  [role="dialog"], [data-state="open"] {
+    background: white !important;
+    position: static !important;
+    transform: none !important;
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  /* Sembunyikan tombol-tombol di dalam modal saat print */
+  button, .no-print {
+    display: none !important;
+  }
+
+  @page {
+    size: 58mm auto;
+    margin: 0;
+  }
+}

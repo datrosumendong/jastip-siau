@@ -1,0 +1,59 @@
+
+{
+  "placeholderImages": [
+    {
+      "id": "pwa-screenshot-1",
+      "description": "Beranda Utama Jastip Siau - Radar Logistik Terpadu",
+      "imageUrl": "https://picsum.photos/seed/jastip1/1080/1920",
+      "imageHint": "mobile dashboard"
+    },
+    {
+      "id": "pwa-screenshot-2",
+      "description": "Pusat Komunitas Siau Connect - Berbagi Kabar Warga",
+      "imageUrl": "https://picsum.photos/seed/jastip2/1080/1920",
+      "imageHint": "social feed"
+    },
+    {
+      "id": "pwa-screenshot-3",
+      "description": "Pasar Digital UMKM Siau - Dukung Ekonomi Lokal",
+      "imageUrl": "https://picsum.photos/seed/jastip3/1080/1920",
+      "imageHint": "marketplace shop"
+    },
+    {
+      "id": "pwa-screenshot-4",
+      "description": "Markas Komando Admin Siau - Otoritas Tertinggi",
+      "imageUrl": "https://picsum.photos/seed/jastip4/1920/1080",
+      "imageHint": "desktop admin"
+    },
+    {
+      "id": "pwa-screenshot-5",
+      "description": "Formulir Pemesanan Amanah - Transparan & Cepat",
+      "imageUrl": "https://picsum.photos/seed/jastip5/1080/1920",
+      "imageHint": "order form"
+    },
+    {
+      "id": "pwa-screenshot-6",
+      "description": "Pusat Pesan Terpadu - Koordinasi Real-time",
+      "imageUrl": "https://picsum.photos/seed/jastip6/1080/1920",
+      "imageHint": "chat application"
+    },
+    {
+      "id": "pwa-screenshot-7",
+      "description": "Radar Sanksi & Penegakan Hukum - Integritas Warga",
+      "imageUrl": "https://picsum.photos/seed/jastip7/1080/1920",
+      "imageHint": "security panel"
+    },
+    {
+      "id": "pwa-screenshot-8",
+      "description": "Visualisasi Peta Jalur Jastip - Lacak Posisi Kurir",
+      "imageUrl": "https://picsum.photos/seed/jastip8/1920/1080",
+      "imageHint": "map navigation"
+    },
+    {
+      "id": "hero-delivery",
+      "description": "Layanan Jasa Titip Terpercaya di Kepulauan Siau",
+      "imageUrl": "https://picsum.photos/seed/hero/1200/800",
+      "imageHint": "delivery hero"
+    }
+  ]
+}
