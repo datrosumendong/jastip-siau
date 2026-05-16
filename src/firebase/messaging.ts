@@ -33,8 +33,8 @@ export async function requestNotificationPermission(userId: string) {
       
       await navigator.serviceWorker.ready;
 
-      // KUNCI VAPID PIMPINAN: BBB9D45...
-      const VAPID_KEY = 'BBB9D45KlR2E0khLRE03h5Ckd6QY-mqwUKVnrCx2bzWxZl-P2dADCtxerg0iLYASHKLoNWOBdFcCV9a6AWECoBY'; 
+      // KUNCI VAPID PIMPINAN: BDOs4X8...
+      const VAPID_KEY = 'BDOs4X8n43Lb1IQw4c6Fo_oEdPOacqvVWbRt9bEz2xWreLTi6OR85EKlfavJyjjFM3fyq1eM1xc7kiI_NNI73Qc'; 
 
       const token = await getToken(messaging, {
         vapidKey: VAPID_KEY,

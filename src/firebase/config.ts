@@ -16,4 +16,4 @@ export const firebaseConfig = {
 };
 
 // API KEY RESMI PIMPINAN
-export const googleMapsApiKey = "AIzaSyDHkFu-cvKdyUllt-hBaD4LDm0mfo-Q0F4";
+export const googleMapsApiKey = "AIzaSyAz45q74jtyGrcGEPuZaH5D6XDACcbr3U0";
