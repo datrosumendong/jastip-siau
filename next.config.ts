@@ -12,9 +12,10 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  output: 'standalone',
+  output: process.env.BUILD_TARGET === 'backend' ? 'standalone' : 'export',
   generateEtags: false,
   images: {
+    unoptimized: true,
     remotePatterns: [
       { protocol: 'https', hostname: 'placehold.co' },
       { protocol: 'https', hostname: 'images.unsplash.com' },

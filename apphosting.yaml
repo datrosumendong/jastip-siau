@@ -2,6 +2,9 @@
 # https://firebase.google.com/docs/app-hosting/configure
 
 runConfig:
-  # Increase this value if you'd like to automatically spin up
-  # more instances in response to increased traffic.
+  # MEMBATASI ANGGARAN: Hanya 1 mesin maksimal
   maxInstances: 1
+  # MEMBATASI MEMORI: Sesuai kebutuhan backend ringan
+  memory: 256MiB
+  # PENCEGAHAN TIMEOUT: Agar tidak menggantung terlalu lama
+  timeoutSeconds: 60
