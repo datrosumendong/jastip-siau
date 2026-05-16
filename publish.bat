@@ -4,9 +4,6 @@ git add .
 git commit -m "Auto-publish: %date% %time%"
 git push origin main
 
-echo [2/3] Membangun aplikasi Next.js (Build)...
-call npm.cmd run build
-
 echo [3/3] Mengirim ke Firebase Hosting...
 call firebase deploy --only hosting
 
